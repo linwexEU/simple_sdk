@@ -61,5 +61,5 @@ uvicorn src.main:app # Before run, create and configure .env file
 
 Docker(Go to: http://127.0.0.1:7777/docs):
 ```
-docker compose -f ./docker/docker-compose.yml up
+docker compose -f ./docker/docker-compose.yml up # Before run, create and configure .env-docker file
 ```
