@@ -1,0 +1,10 @@
+services:
+  simple_sdk:
+    container_name: "simple_sdk_container"
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - 7777:8000
+    env_file:
+      - .env-docker
