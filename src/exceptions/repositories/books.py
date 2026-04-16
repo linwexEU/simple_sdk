@@ -1,4 +1,4 @@
 
 
 class BookNotFoundException(Exception):
-    pass
+    """Raised when a book is not found."""

@@ -1,4 +1,4 @@
 
 
 class ExternalAPIException(Exception):
-    pass
+    """Exception for external API errors."""

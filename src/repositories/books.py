@@ -10,10 +10,10 @@ class InMemoryBookRepository(AbstractRepository):
     def __init__(self) -> None:
         self.books = []
 
-    def get_books(self) -> list[dict[str, Any]]:
+    def get_all(self) -> list[dict[str, Any]]:
         return self.books
 
-    def create_book(self, title: str, author: str, price: float) -> str:
+    def create(self, title: str, author: str, price: float) -> str:
         book_uuid = str(uuid.uuid4())
         self.books.append(
             {
@@ -25,7 +25,7 @@ class InMemoryBookRepository(AbstractRepository):
         )
         return book_uuid
 
-    def delete_book(self, book_uuid: str) -> str:
+    def delete(self, book_uuid: str) -> str:
         for book in self.books:
             if book["book_uuid"] == book_uuid:
                 self.books.remove(book)
@@ -33,7 +33,7 @@ class InMemoryBookRepository(AbstractRepository):
 
         raise BookNotFoundException
 
-    def update_book(
+    def update(
         self,
         book_uuid: str,
         title: str | None = None,

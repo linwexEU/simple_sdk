@@ -15,7 +15,9 @@ def get_books_repo() -> InMemoryBookRepository:
     return books_repo
 
 
-def get_books_service(repo: type[AbstractRepository] = Depends(get_books_repo)) -> BooksService:
+def get_books_service(
+    repo: type[AbstractRepository] = Depends(get_books_repo)  # noqa: WPS404
+) -> BooksService:
     """Function for getting Books Service with dependencies"""
     return BooksService(repo)
 
@@ -25,7 +27,7 @@ def get_auth_service(request: Request) -> AuthService:
     return AuthService(request.app.state.http_client)
 
 
-def get_current_user(request: Request) -> None:
+def check_current_user(request: Request) -> None:
     """Return current user base on cookie"""
     token = request.cookies.get("auth")
     if not token:
@@ -34,4 +36,4 @@ def get_current_user(request: Request) -> None:
 
 BooksServiceDep = Annotated[BooksService, Depends(get_books_service)]
 AuthServiceDep = Annotated[AuthService, Depends(get_auth_service)]
-CurrentUserDep = Annotated[None, Depends(get_current_user)]
+CurrentUserDep = Annotated[None, Depends(check_current_user)]
