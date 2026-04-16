@@ -1,10 +1,10 @@
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 
-from src.exceptions.http.http_exception import ExternalAPIException
+from src.exceptions.http.http_exc import ExternalAPIException
 
 
-async def external_api_error_handler(request: Request, exc: ExternalAPIException):
+async def external_api_error_handler(request: Request, exc: ExternalAPIException) -> JSONResponse:
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={

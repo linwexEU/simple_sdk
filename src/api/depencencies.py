@@ -2,10 +2,9 @@ from typing import Annotated
 
 from fastapi import Depends, Request, HTTPException, status
 
-from src.repositories.books import InMemoryBookRepository
-from src.repositories.base import AbstractRepository
-from src.api.services.books import BooksService
-from src.api.services.auth import AuthService
+from src.repositories import InMemoryBookRepository
+from src.repositories import AbstractRepository
+from src.api.services import BooksService, AuthService
 
 books_repo = InMemoryBookRepository()
 

@@ -2,10 +2,9 @@ import logging
 
 from fastapi import Depends
 
-from src.repositories.base import AbstractRepository
-from src.exceptions.repositories.books import BookNotFoundException
-from src.exceptions.services.books import BookNotFoundServiceException
-from src.schemas.books import SBook, SBookUpdate, ListBooks, SBookResponse
+from src.repositories import AbstractRepository
+from src.exceptions import BookNotFoundException, BookNotFoundServiceException
+from src.schemas import SBook, SBookUpdate, ListBooks, SBookResponse
 
 logger = logging.getLogger(__name__)
 

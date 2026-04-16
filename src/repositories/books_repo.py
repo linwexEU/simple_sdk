@@ -1,14 +1,14 @@
 import uuid
 from typing import Any
 
-from src.repositories.base import AbstractRepository
-from src.exceptions.repositories.books import BookNotFoundException
+from src.repositories import AbstractRepository
+from src.exceptions import BookNotFoundException
 
 
 class InMemoryBookRepository(AbstractRepository):
     """InMemoryRepository with all crud operations"""
     def __init__(self) -> None:
-        self.books = []
+        self.books: list[dict[str, Any]] = []
 
     def get_all(self) -> list[dict[str, Any]]:
         return self.books

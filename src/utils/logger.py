@@ -1,7 +1,7 @@
 import logging
 
 
-def config_logger(level: int = logging.INFO):
+def config_logger(level: int = logging.INFO) -> None:
     logging.basicConfig(
         level=level,
         datefmt="%Y-%m-%d %H:%M:%S",

@@ -63,3 +63,9 @@ Docker(Go to: http://127.0.0.1:7777/docs):
 ```bash
 docker compose -f ./docker/docker-compose.yml up # Before run, create and configure .env-docker file
 ```
+
+# Run mypy
+```bash
+cd src
+mypy .
+```

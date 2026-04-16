@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from src.schemas.books import SBookUpdate
-from src.schemas.books import ListBooks, SBook, SBookResponse
+from src.schemas.books_schema import SBookUpdate
+from src.schemas.books_schema import ListBooks, SBook, SBookResponse
 from src.api.depencencies import BooksServiceDep, CurrentUserDep
 
 router = APIRouter()

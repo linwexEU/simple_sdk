@@ -6,7 +6,7 @@ from typing import Any, Callable
 import aiohttp
 from fastapi import status
 
-from src.exceptions.http.http_exception import ExternalAPIException
+from src.exceptions import ExternalAPIException
 from src.utils.config import settings
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ async def _execute_with_retry(
     raise ExternalAPIException from last_exception
 
 
-def retry(attempts: int):
+def retry(attempts: int) -> Callable[..., Any]:
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
         async def wrapper(*args: Any, **kwargs: Any) -> Any:

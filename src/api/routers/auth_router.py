@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Body, Response
 from pydantic import EmailStr
 
-from src.schemas.auth import SAuth
+from src.schemas.auth_schema import SAuth
 from src.api.depencencies import AuthServiceDep
 from src.utils.config import settings
 
