@@ -11,8 +11,8 @@ load_dotenv(env_path)
 
 
 class Settings(BaseSettings):
-    API_KEY: str  # noqa: WPS115
-    COOKIE_MAX_AGE: int  # noqa: WPS115
+    API_KEY: str
+    COOKIE_MAX_AGE: int
 
     model_config = SettingsConfigDict(env_file=env_path)
 

@@ -20,13 +20,13 @@ async def _execute_with_retry(
 
     for attempt in range(1, attempts + 1):
         try:
-            return await func()  # noqa: WPS476
+            return await func()
         except (aiohttp.ClientError, asyncio.TimeoutError) as ex:
             last_exception = ex
             logger.warning(f"Attempt {attempt}/{attempts} failed: {ex}")
 
         if attempt < attempts:
-            await asyncio.sleep(2 ** attempt)  # noqa: WPS476
+            await asyncio.sleep(2 ** attempt)
 
     raise ExternalAPIException from last_exception
 

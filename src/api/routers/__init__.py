@@ -1,6 +1,3 @@
-# noqa: WPS412
-# noqa: WPS410
-
 __all__ = (
     "auth_router",
     "books_router"

@@ -13,7 +13,7 @@ class BooksService:
     """Books Service with all crud operations"""
     def __init__(
         self,
-        repo: type[AbstractRepository] = Depends()  # noqa: WPS404
+        repo: type[AbstractRepository] = Depends()
     ) -> None:
         self.repo = repo
 

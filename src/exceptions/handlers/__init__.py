@@ -1,6 +1,3 @@
-# noqa: WPS412
-# noqa: WPS410
-
 __all__ = (
     "external_api_error_handler",
     "book_not_found_handler"

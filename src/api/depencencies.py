@@ -15,7 +15,7 @@ def get_books_repo() -> InMemoryBookRepository:
 
 
 def get_books_service(
-    repo: type[AbstractRepository] = Depends(get_books_repo)  # noqa: WPS404
+    repo: type[AbstractRepository] = Depends(get_books_repo)
 ) -> BooksService:
     """Function for getting Books Service with dependencies"""
     return BooksService(repo)
