@@ -27,7 +27,7 @@ def get_auth_service(request: Request) -> AuthService:
 
 
 def check_current_user(request: Request) -> None:
-    """Return current user base on cookie"""
+    """Check current user base on cookie"""
     token = request.cookies.get("auth")
     if not token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
