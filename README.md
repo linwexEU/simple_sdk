@@ -17,36 +17,6 @@ A modular and production-ready backend service built with **FastAPI**, following
 
 ---
 
-## 📁 Project Structure
-
-```
-src/
-│
-├── api/
-│   ├── routers/        # API endpoints (auth, books)
-│   ├── services/       # Business logic
-│   ├── depencencies.py # Dependency injection setup
-│
-├── repositories/       # Data access layer
-│
-├── schemas/            # Pydantic models
-│
-├── exceptions/
-│   ├── handlers/       # Exception handlers (FastAPI layer)
-│   ├── services/       # Service-level exceptions
-│   ├── repositories/   # Repository-level exceptions
-│   ├── http/           # External API exceptions
-│
-├── utils/
-│   ├── config.py       # Configuration management
-│   ├── http_client.py  # Async HTTP client wrapper
-│   ├── logger.py       # Logging setup
-│
-└── main.py             # App entry point
-```
-
----
-
 ## 🔧 Installation
 
 Manual(Go to: http://127.0.0.1:8000/docs):
