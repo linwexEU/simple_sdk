@@ -1,5 +1,17 @@
 __all__ = (
-    "BookNotFoundServiceException",
+    "InvalidUserEmailError",
+    "UserAlreadyExistsServiceError",
+    "UserNotFoundServiceError",
+    "BookNotFoundServiceError",
+    "BookAlreadyExistsServiceError"
 )
 
-from src.exceptions.services.books_service_exc import BookNotFoundServiceException
+from src.exceptions.services.users import (
+    InvalidUserEmailError,
+    UserAlreadyExistsServiceError,
+    UserNotFoundServiceError
+)
+from src.exceptions.services.library import (
+    BookNotFoundServiceError,
+    BookAlreadyExistsServiceError
+)

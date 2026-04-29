@@ -3,21 +3,63 @@ from collections.abc import AsyncIterator
 
 from fastapi import FastAPI
 
-from src.exceptions import book_not_found_handler
-from src.exceptions import external_api_error_handler
-from src.exceptions import BookNotFoundServiceException
-from src.exceptions import ExternalAPIException
+from src.exceptions.http import ExternalAPIException
 from src.api.router import router as main_router
-from src.utils.logger import config_logger
-from src.utils.http_client import HttpClient
+from src.core.logger import config_logger
+from src.infrastructure.email_verifiers.hunter import HunterEmailVerifier
+from src.infrastructure.http_clients.books import BigBookHttpClient
+from src.exceptions.services import (
+    InvalidUserEmailError,
+    UserAlreadyExistsServiceError,
+    UserNotFoundServiceError,
+    BookNotFoundServiceError,
+    BookAlreadyExistsServiceError
+)
+from src.exceptions.handlers import (
+    invalid_user_email_error_handler,
+    user_already_exists_error_handler,
+    user_not_found_error_handler,
+    external_api_error_handler,
+    book_not_found_error_handler,
+    book_already_exists_error_handler
+)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     config_logger()
-    app.state.http_client = HttpClient()
+    app.state.email_verifier = HunterEmailVerifier()
+    app.state.books_client = BigBookHttpClient()
     yield
-    await app.state.http_client.session.close()
+    await app.state.email_verifier.session.close()
+    await app.state.books_client.session.close()
+
+
+def _add_exception_handlers(app: FastAPI) -> None:
+    app.add_exception_handler(
+        InvalidUserEmailError,
+        invalid_user_email_error_handler
+    )
+    app.add_exception_handler(
+        UserAlreadyExistsServiceError,
+        user_already_exists_error_handler
+    )
+    app.add_exception_handler(
+        UserNotFoundServiceError,
+        user_not_found_error_handler
+    )
+    app.add_exception_handler(
+        ExternalAPIException,
+        external_api_error_handler
+    )
+    app.add_exception_handler(
+        BookNotFoundServiceError,
+        book_not_found_error_handler
+    )
+    app.add_exception_handler(
+        BookAlreadyExistsServiceError,
+        book_already_exists_error_handler
+    )
 
 
 def create_app() -> FastAPI:
@@ -27,8 +69,7 @@ def create_app() -> FastAPI:
     app.include_router(main_router)
 
     # Add all exception handlers
-    app.add_exception_handler(BookNotFoundServiceException, book_not_found_handler)
-    app.add_exception_handler(ExternalAPIException, external_api_error_handler)
+    _add_exception_handlers(app)
 
     return app
 

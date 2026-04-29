@@ -4,10 +4,8 @@ import logging
 from typing import Any, Callable
 
 import aiohttp
-from fastapi import status
 
-from src.exceptions import ExternalAPIException
-from src.utils.config import settings
+from src.exceptions.http import ExternalAPIException
 
 logger = logging.getLogger(__name__)
 
@@ -38,22 +36,3 @@ def retry(attempts: int) -> Callable[..., Any]:
             return await _execute_with_retry(lambda: func(*args, **kwargs), attempts)
         return wrapper
     return decorator
-
-
-class HttpClient:
-    """Client to work with external API"""
-    def __init__(self) -> None:
-        self.session: aiohttp.ClientSession = aiohttp.ClientSession()
-
-    @retry(5)
-    async def validate_email(self, email: str) -> dict[str, Any]:
-        query_params = {
-            "email": email,
-            "api_key": settings.API_KEY
-        }
-        async with self.session.get("https://api.hunter.io/v2/email-verifier", params=query_params) as response:
-            if response.status != status.HTTP_200_OK:
-                raise ExternalAPIException(f"Bad status: {response.status}")
-
-            json = await response.json()
-            return json

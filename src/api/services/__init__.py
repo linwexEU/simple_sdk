@@ -1,7 +1,9 @@
 __all__ = (
-    "AuthService",
-    "BooksService"
+    "BooksService",
+    "UsersService",
+    "LibraryService"
 )
 
-from src.api.services.auth_service import AuthService
-from src.api.services.books_service import BooksService
+from src.api.services.books import BooksService
+from src.api.services.users import UsersService
+from src.api.services.library import LibraryService

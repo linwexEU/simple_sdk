@@ -1,5 +1,15 @@
 __all__ = (
-    "BookNotFoundException",
+    "BookAlreadyExistsError",
+    "BookNotFoundError",
+    "UserAlreadyExistsError",
+    "UserNotFoundError"
 )
 
-from src.exceptions.repositories.books_repo_exc import BookNotFoundException
+from src.exceptions.repositories.library import (
+    BookAlreadyExistsError,
+    BookNotFoundError
+)
+from src.exceptions.repositories.users import (
+    UserAlreadyExistsError,
+    UserNotFoundError
+)

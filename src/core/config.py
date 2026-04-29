@@ -1,18 +1,15 @@
-import os
-
 from dotenv import load_dotenv, find_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(current_dir)
-
-env_path = find_dotenv("../.env")
+env_path = find_dotenv("src/.env")
 load_dotenv(env_path)
 
 
 class Settings(BaseSettings):
-    API_KEY: str
     COOKIE_MAX_AGE: int
+
+    HUNTER_API_KEY: str
+    BIG_BOOK_API_KEY: str
 
     model_config = SettingsConfigDict(env_file=env_path)
 
