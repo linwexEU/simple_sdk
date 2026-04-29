@@ -4,6 +4,7 @@ from typing import Any
 import aiohttp
 from fastapi import status
 
+from src.infrastructure.http_utils.helper import retry
 from src.exceptions.http import ExternalAPIException
 from src.core.interfaces.http_clients.books import AbstractBookHttpClient
 from src.core.config import settings
@@ -16,6 +17,7 @@ class BigBookHttpClient(AbstractBookHttpClient):
     def __init__(self) -> None:
         self.session: aiohttp.ClientSession = aiohttp.ClientSession()
 
+    @retry(5)
     async def search_books(self, query: str) -> dict[str, Any]:
         query_params = {
             "query": query,
@@ -32,6 +34,7 @@ class BigBookHttpClient(AbstractBookHttpClient):
             json = await response.json()
             return json
 
+    @retry(5)
     async def get_book_info(self, book_id: int) -> dict[str, Any]:
         query_params = {
             "api-key": settings.BIG_BOOK_API_KEY
